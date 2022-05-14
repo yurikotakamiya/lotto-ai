@@ -7,8 +7,12 @@ load_dotenv()
 
 account_sid = os.getenv('account_sid')
 auth_token = os.getenv('auth_token')
-# client = Client(account_sid, auth_token) 
-print(account_sid, auth_token)
-def sendMessage(client, body):
-    # print(message.sid)
-    pass
+client = Client(account_sid, auth_token)
+
+
+def send_message(body, to_num):
+    client.messages.create(
+        to=to_num,
+        from_=os.getenv('from_number'),
+        body=body
+    )
