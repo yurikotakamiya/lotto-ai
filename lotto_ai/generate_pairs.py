@@ -1,4 +1,5 @@
-from db import select_phones, insert_predicted_numbers, connection
+from db import select_phones, insert_predicted_numbers, connection, select_predicted
+from message import send_message
 from sys import argv
 import random
 import datetime
@@ -20,7 +21,7 @@ def generate_pairs(lotto_type):
     return ', '.join([str(num) for num in sorted(pairs)])
 
 
-def send_message(lotto_type):
+def insert_pairs(lotto_type):
     phones = select_phones()
     current_date = datetime.date.today().strftime('%d-%b-%y')
     for phone in phones:
@@ -31,4 +32,13 @@ def send_message(lotto_type):
     connection.commit()
 
 
-send_message(argv[1])
+def send_text(lotto_type):
+    send_list = select_predicted(lotto_type)
+    for row in send_list:
+        phone = row[0]
+        pair = ','.join(str(a) for a in row[1:7])
+        send_message(
+            f'This is your predicted winning number for {lotto_type} is {pair}', phone)
+
+
+send_text(argv[1])
