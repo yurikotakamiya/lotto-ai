@@ -35,3 +35,14 @@ def select_phones():
     phones = [entry[0] for entry in cursor.execute(select)]
 
     return phones
+
+
+def select_predicted(lotto_type):
+    if lotto_type == 'megamillion':
+        select = "select PHONE, NUM_1, NUM_2, NUM_3, NUM_4, NUM_5, NUM_6 from PREDICTION_MEGA_MILLION"
+        entries = [entry[0:7] for entry in cursor.execute(select)]
+        return entries
+    else:
+        select = "select PHONE, NUM_1, NUM_2, NUM_3, NUM_4, NUM_5, NUM_6 from PREDICTION_POWERBALL"
+        entries = [entry[0:7] for entry in cursor.execute(select)]
+        return entries
