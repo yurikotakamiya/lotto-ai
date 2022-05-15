@@ -1,5 +1,6 @@
 certifi==2021.10.8
 charset-normalizer==2.0.12
+cx-Oracle==8.3.0
 idna==3.3
 PyJWT==2.3.0
 python-dotenv==0.20.0
