@@ -1,11 +1,9 @@
-from db import connection
+from db import connection, insert_winning_pairs
 import requests
 import json
 
 from sys import argv
 from datetime import datetime
-
-from db import insert_winning_pairs
 
 def get_date(date_string):
     date_object = datetime.strptime(date_string[0:10], '%Y-%m-%d')
