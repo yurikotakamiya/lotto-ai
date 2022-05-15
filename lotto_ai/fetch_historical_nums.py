@@ -5,7 +5,7 @@ import json
 from sys import argv
 from datetime import datetime
 
-from db import insert
+from db import insert_winning_pairs
 
 def get_date(date_string):
     date_object = datetime.strptime(date_string[0:10], '%Y-%m-%d')
@@ -28,7 +28,7 @@ def fetch_numbers(lotto_type, latest_only):
             multiplier = json_object[0]['multiplier']
             multiplier = str(int(multiplier)) if multiplier else '1'
             string = f"'{date}', {numbers}, {multiplier}"
-            insert(lotto_type, string)
+            insert_winning_pairs(lotto_type, string)
 
         else:
             for row in json_object:
@@ -37,7 +37,7 @@ def fetch_numbers(lotto_type, latest_only):
                 multiplier = str(int(row['multiplier']))                
                 multiplier = str(int(multiplier)) if multiplier else '1'
                 string = f"'{date}', {numbers}, {multiplier}"
-                insert(lotto_type, string)
+                insert_winning_pairs(lotto_type, string)
             
     elif lotto_type == 'powerball':
         url = 'https://data.ny.gov/resource/d6yy-54nr.json'
@@ -49,7 +49,7 @@ def fetch_numbers(lotto_type, latest_only):
             multiplier = json_object[0]['multiplier']
             multiplier = str(int(multiplier)) if multiplier else '1'
             string = f"'{date}', {numbers}, {multiplier}"
-            insert(lotto_type, string)
+            insert_winning_pairs(lotto_type, string)
 
         else:
             for row in json_object:
@@ -61,7 +61,7 @@ def fetch_numbers(lotto_type, latest_only):
                 else:
                     multiplier = '1'
                 string = f"'{date}', {numbers}, {multiplier}"
-                insert(lotto_type, string)
+                insert_winning_pairs(lotto_type, string)
                 
     connection.commit()
 
