@@ -22,7 +22,6 @@ def fetch_numbers(lotto_type, latest_only):
         r = requests.get(url)
         json_object = json.loads(r.content)
 
-        print(latest_only)
         if latest_only.lower() == 'true':
             date = get_date(json_object[0]['draw_date'])
             numbers = get_numbers(json_object[0]['winning_numbers']) + ', ' + json_object[0]['mega_ball']
@@ -34,7 +33,7 @@ def fetch_numbers(lotto_type, latest_only):
         else:
             for row in json_object:
                 date = get_date(row['draw_date'])
-                numbers = get_numbers(row['winning_numbers'])  + ', ' + json_object[0]['mega_ball']
+                numbers = get_numbers(row['winning_numbers'])  + ', ' + row['mega_ball']
                 multiplier = str(int(row['multiplier']))                
                 multiplier = str(int(multiplier)) if multiplier else '1'
                 string = f"'{date}', {numbers}, {multiplier}"
@@ -63,7 +62,7 @@ def fetch_numbers(lotto_type, latest_only):
                     multiplier = '1'
                 string = f"'{date}', {numbers}, {multiplier}"
                 insert(lotto_type, string)
-                print(string)
-        connection.commit()
+                
+    connection.commit()
 
 fetch_numbers(argv[1], argv[2])
