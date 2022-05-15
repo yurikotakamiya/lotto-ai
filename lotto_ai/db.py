@@ -24,9 +24,9 @@ def insert_winning_pairs(lotto_type, data):
 def insert_predicted_numbers(lotto_type, data):
     insert = ''
     if lotto_type == 'megamillion':
-        insert = "insert into PREDICTION_MEGA_MILLION(PREDICTED_DATE, EMAIL, NUM_1, NUM_2, NUM_3, NUM_4, NUM_5, NUM_6) values(" + data + ')'
+        insert = "insert into PREDICTION_MEGA_MILLION(PREDICTED_DATE, PHONE, NUM_1, NUM_2, NUM_3, NUM_4, NUM_5, NUM_6) values(" + data + ')'
     else:
-        insert = "insert into PREDICTION_POWERBALL(PREDICTED_DATE, EMAIL, NUM_1, NUM_2, NUM_3, NUM_4, NUM_5, NUM_6) values(" + data + ')'
+        insert = "insert into PREDICTION_POWERBALL(PREDICTED_DATE, PHONE, NUM_1, NUM_2, NUM_3, NUM_4, NUM_5, NUM_6) values(" + data + ')'
     cursor.execute(insert)
 
 
