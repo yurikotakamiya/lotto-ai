@@ -2,11 +2,13 @@ import os
 import cx_Oracle
 
 from dotenv import load_dotenv
+from lotto_ai.os import is_linux
 
 load_dotenv()
 
-cx_Oracle.init_oracle_client(os.environ.get(
-    'HOME') + '/Downloads/instantclient_19_8')
+oracle_home = os.getenv('linux_oracle_home') if is_linux() else os.environ.get(
+    'HOME') + os.getenv('mac_oracle_home')
+cx_Oracle.init_oracle_client(oracle_home)
 connection = cx_Oracle.connect(user=os.getenv('oracle_user'), password=os.getenv(
     'oracle_password'), dsn=os.getenv('oracle_dsn'))
 cursor = connection.cursor()
