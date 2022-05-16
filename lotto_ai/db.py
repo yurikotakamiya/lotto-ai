@@ -2,7 +2,7 @@ import os
 import cx_Oracle
 
 from dotenv import load_dotenv
-from lotto_ai.os import is_linux
+from os_util import is_linux
 
 load_dotenv()
 
